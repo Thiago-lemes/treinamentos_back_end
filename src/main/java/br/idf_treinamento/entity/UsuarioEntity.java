@@ -1,26 +1,43 @@
 package br.idf_treinamento.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
-public class UsuarioEntity {
+public class UsuarioEntity implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
 
+    @Column(unique = true, nullable = false)
     private String email;
 
-    private int telefone;
+    private String telefone;
 
-    public UsuarioEntity() {}
+    @Column(nullable = false)
+    private String password;
 
-    public UsuarioEntity(String nome, String email, int telefone) {
+    @Enumerated(EnumType.STRING)
+    private UserRoleEnum role;
+
+    public UsuarioEntity() {
+    }
+
+    public UsuarioEntity(String nome, String email, String telefone, String password, UserRoleEnum role) {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+        this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -31,11 +48,11 @@ public class UsuarioEntity {
         this.id = id;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 
@@ -53,5 +70,57 @@ public class UsuarioEntity {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public UserRoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(UserRoleEnum role) {
+        this.role = role;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.role == UserRoleEnum.ADMIN) {
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_USER")
+            );
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

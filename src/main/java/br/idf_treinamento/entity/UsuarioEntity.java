@@ -21,8 +21,6 @@ public class UsuarioEntity implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
 
-    private String telefone;
-
     @Column(nullable = false)
     private String password;
 
@@ -32,10 +30,9 @@ public class UsuarioEntity implements UserDetails {
     public UsuarioEntity() {
     }
 
-    public UsuarioEntity(String nome, String email, String telefone, String password, UserRoleEnum role) {
+    public UsuarioEntity(String nome, String email, String password, UserRoleEnum role) {
         this.nome = nome;
         this.email = email;
-        this.telefone = telefone;
         this.password = password;
         this.role = role;
     }
@@ -46,14 +43,6 @@ public class UsuarioEntity implements UserDetails {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getEmail() {

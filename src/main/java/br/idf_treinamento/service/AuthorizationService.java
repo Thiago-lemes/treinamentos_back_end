@@ -40,9 +40,7 @@ public class AuthorizationService implements UserDetailsService {
     }
 
     public ResponseEntity<LoginResponseDTO> login(AuthenticationDTO dto) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(dto.login(), dto.password());
-        var auth = authenticationManager.authenticate(usernamePassword);
-        var token = tokenService.generateToken((UsuarioEntity) auth.getPrincipal());
+        var token = criaToken(dto.login(), dto.password());
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
@@ -54,13 +52,19 @@ public class AuthorizationService implements UserDetailsService {
         UsuarioEntity usuario = new UsuarioEntity(dto.nome(), dto.email(), encryptedPassword, dto.role());
         UsuarioEntity novoUsuario = repository.save(usuario);
 
+        var token = criaToken(dto.email(), dto.password());
         UsuarioResponseDTO responseDTO = new UsuarioResponseDTO(
                 novoUsuario.getId(),
                 novoUsuario.getNome(),
-                novoUsuario.getEmail()
+                novoUsuario.getEmail(),
+                token
         );
-
         return ResponseEntity.ok(responseDTO);
+    }
 
+    private String criaToken(String login, String password) {
+        var usernamePassword = new UsernamePasswordAuthenticationToken(login, password);
+        var auth = authenticationManager.authenticate(usernamePassword);
+        return tokenService.generateToken((UsuarioEntity) auth.getPrincipal());
     }
 }

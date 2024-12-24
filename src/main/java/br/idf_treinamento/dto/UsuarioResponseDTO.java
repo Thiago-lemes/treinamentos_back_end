@@ -1,4 +1,4 @@
 package br.idf_treinamento.dto;
 
-public record UsuarioResponseDTO(Long id, String nome, String email) {
+public record UsuarioResponseDTO(Long id, String nome, String email, String token ) {
 }

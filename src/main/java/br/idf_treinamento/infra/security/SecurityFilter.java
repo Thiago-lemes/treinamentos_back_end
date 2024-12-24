@@ -19,10 +19,14 @@ import java.util.Optional;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
+    private final TokenService tokenService;
+    private final UsuarioRepository userRepository;
+
     @Autowired
-    TokenService tokenService;
-    @Autowired
-    UsuarioRepository userRepository;
+    public SecurityFilter(TokenService tokenService, UsuarioRepository userRepository) {
+        this.tokenService = tokenService;
+        this.userRepository = userRepository;
+    }
 
     @Override
     protected void doFilterInternal(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull FilterChain filterChain) throws ServletException, IOException {

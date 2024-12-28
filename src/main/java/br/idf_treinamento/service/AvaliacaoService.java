@@ -20,13 +20,18 @@ public class AvaliacaoService {
     public AvaliacaoEntity create(AvaliacaoDTO dto) {
 
         AvaliacaoEntity avaliacao = dto.toEntity();
+        var usuario = findByUsuario(dto.usuarioId());
 
-        UsuarioEntity user = usuariorepository.findById(dto.usuarioId())
-                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
-        avaliacao.setUser(user);
+        avaliacao.setUser(usuario);
         avaliacao.setMediaAvaliacao(calculaMedia(dto));
 
         return repository.save(avaliacao);
+    }
+
+    public UsuarioEntity findByUsuario(Long id) {
+        UsuarioEntity user = usuariorepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+        return user;
     }
 
     private double calculaMedia(AvaliacaoDTO dto) {

@@ -50,8 +50,6 @@ public class AvaliacaoEntity {
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity user;
 
-
-
     public AvaliacaoEntity(int metas, int autoconhecimento, int leitura, int gerenciamento,
                            int habilidades, int mindfulness, int vidaEspiritual,
                            int condicionamento) {
@@ -64,5 +62,4 @@ public class AvaliacaoEntity {
         this.notaVidaEspiritual = vidaEspiritual;
         this.notaCondicionamentoFisico = condicionamento;
     }
-
 }

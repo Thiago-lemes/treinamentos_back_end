@@ -17,13 +17,24 @@ public record PlanoAcaoDTO(
         String fisicoCondicionamento,
         String fisicoMudancaAlimentacao,
         String aprendizadoParaAdiquirir,
-        String leituraAprendizadoContinuo
+        String leituraAprendizadoContinuo,
+        Long usuarioId
 ) {
     public PlanoDeAcaoEntity toEntity() {
-        return new PlanoDeAcaoEntity(metasPrioridades, metasAbordagem,
-                forcasAvanco, fraquezasMelhorias, habilidadesComunicacao,
-                habilidadesRelacionamento, praticasRotina, mindfulnessAumentoFoco,
-                espiritualMinisterial, espiritualConecxaoProfunda, fisicoCondicionamento, fisicoMudancaAlimentacao,
-                aprendizadoParaAdiquirir, leituraAprendizadoContinuo);
+        return new PlanoDeAcaoEntity(
+                metasPrioridades,
+                metasAbordagem,
+                forcasAvanco,
+                fraquezasMelhorias,
+                habilidadesComunicacao,
+                habilidadesRelacionamento,
+                praticasRotina,
+                mindfulnessAumentoFoco,
+                espiritualMinisterial,
+                espiritualConecxaoProfunda,
+                fisicoCondicionamento,
+                fisicoMudancaAlimentacao,
+                aprendizadoParaAdiquirir,
+                leituraAprendizadoContinuo);
     }
 }

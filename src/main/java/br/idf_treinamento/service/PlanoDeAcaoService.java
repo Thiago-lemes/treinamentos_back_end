@@ -16,7 +16,7 @@ public class PlanoDeAcaoService {
 
     public PlanoDeAcaoEntity create(PlanoAcaoDTO dto) {
         PlanoDeAcaoEntity planoDeAcao = dto.toEntity();
-        var usuario = avaliacaoService.findByUsuario(dto.id());
+        var usuario = avaliacaoService.findByUsuario(dto.usuarioId());
         planoDeAcao.setUser(usuario);
         return repository.save(planoDeAcao);
     }

@@ -61,10 +61,34 @@ public class PlanoDeAcaoEntity {
     @JoinColumn(name = "usuario_id", nullable = false)
     private UsuarioEntity user;
 
-    public PlanoDeAcaoEntity(String metasPrioridades, String metasAbordagem, String forcasAvanco,
-                             String fraquezasMelhorias, String habilidadesComunicacao, String habilidadesRelacionamento,
-                             String praticasRotina, String mindfulnessAumentoFoco, String espiritualMinisterial,
-                             String espiritualConecxaoProfunda, String fisicoCondicionamento, String fisicoMudancaAlimentacao,
-                             String aprendizadoParaAdiquirir, String leituraAprendizadoContinuo) {
+    public PlanoDeAcaoEntity(String metasPrioridades,
+                             String metasAbordagem,
+                             String forcasAvanco,
+                             String fraquezasMelhorias,
+                             String habilidadesComunicacao,
+                             String habilidadesRelacionamento,
+                             String praticasRotina,
+                             String mindfulnessAumentoFoco,
+                             String espiritualMinisterial,
+                             String espiritualConecxaoProfunda,
+                             String fisicoCondicionamento,
+                             String fisicoMudancaAlimentacao,
+                             String aprendizadoParaAdiquirir,
+                             String leituraAprendizadoContinuo
+    ) {
+        this.metasPrioridades = metasPrioridades;
+        this.metasAbordagem = metasAbordagem;
+        this.forcasAvanco = forcasAvanco;
+        this.fraquezasMelhorias = fraquezasMelhorias;
+        this.habilidadesComunicacao = habilidadesComunicacao;
+        this.habilidadesRelacionamento = habilidadesRelacionamento;
+        this.particasRotina = praticasRotina;
+        this.mindfulnessAumentoFoco = mindfulnessAumentoFoco;
+        this.espiritualMinisterial = espiritualMinisterial;
+        this.espiritualConecxaoProfunda = espiritualConecxaoProfunda;
+        this.fisicoCondicionamento = fisicoCondicionamento;
+        this.fisicoMudancaAlimentacao = fisicoMudancaAlimentacao;
+        this.aprendizadoParaAdiquirir = aprendizadoParaAdiquirir;
+        this.leituraAprendizadoContinuo = leituraAprendizadoContinuo;
     }
 }
